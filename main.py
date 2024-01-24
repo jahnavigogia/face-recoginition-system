@@ -1,4 +1,12 @@
+from typing import Any
+
 import cv2
+import glob
+
+from cv2 import UMat, Mat
+from numpy import ndarray, dtype, generic
+
+count = 1
 
 # Load the pre-trained Haarcascades classifier
 face_cascade = cv2.CascadeClassifier('/Users/jahnavi/PycharmProjects/Face-Recoginition-System/deep-learning-model.xml')
@@ -18,7 +26,12 @@ while True:
 
     # Draw rectangles around the faces
     for (x, y, w, h) in faces:
-        cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
+        rect = cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
+
+        if rect.any():
+            status = 1
+            cv2.imwrite(f"images/{count}.png", frame)
+            count = count + 1
 
     # Display the frame
     cv2.imshow('Face Recognition', frame)
@@ -26,6 +39,7 @@ while True:
     # Break the loop if 'q' is pressed
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
+
 
 # Release the webcam and close the OpenCV window
 cap.release()
