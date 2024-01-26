@@ -3,8 +3,6 @@ from typing import Any
 import cv2
 import glob
 
-from cv2 import UMat, Mat
-from numpy import ndarray, dtype, generic
 
 count = 1
 
